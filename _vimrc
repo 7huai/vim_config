@@ -1,10 +1,54 @@
+" VIM 64Bit to use Python 
+" Vim with all enhancements
+" source $VIMRUNTIME/vimrc_example.vim
+
+" Use the internal diff if available.
+" Otherwise use the special 'diffexpr' for Windows.
+" if &diffopt !~# 'internal'
+"   set diffexpr=MyDiff()
+" endif
+" function MyDiff()
+"   let opt = '-a --binary '
+"   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+"   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+"   let arg1 = v:fname_in
+"   if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+"   let arg1 = substitute(arg1, '!', '\!', 'g')
+"   let arg2 = v:fname_new
+"   if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+"   let arg2 = substitute(arg2, '!', '\!', 'g')
+"   let arg3 = v:fname_out
+"   if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+"   let arg3 = substitute(arg3, '!', '\!', 'g')
+"   if $VIMRUNTIME =~ ' '
+"     if &sh =~ '\<cmd'
+"       if empty(&shellxquote)
+"         let l:shxq_sav = ''
+"         set shellxquote&
+"       endif
+"       let cmd = '"' . $VIMRUNTIME . '\diff"'
+"     else
+"       let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+"     endif
+"   else
+"     let cmd = $VIMRUNTIME . '\diff'
+"   endif
+"   let cmd = substitute(cmd, '!', '\!', 'g')
+"   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+"   if exists('l:shxq_sav')
+"     let &shellxquote=l:shxq_sav
+"   endif
+" endfunction
+
+
 "-------------------------------7huai-----------------------------------"
 "--------------------------vim config file------------------------------"
-
+"git 个人令牌
+"git token: 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
 "           gvim 文件默认保存位置
 " 格式： exec 'cd' fnameescape('path')
 "
-exec 'cd' fnameescape('D:\Program_temp')
+" exec 'cd' fnameescape('D:\Program_temp')
 " exec 'cd' fnameescape('C:\Users\7huai\Desktop\FreeRTOS\freertos')
 
 "           使用jk作为<ESC>与<Ctrl>[的remap
@@ -32,15 +76,15 @@ let mapleader = ","
 noremap <tab> %
 set mousehide
 set nospell
-set wrap
+set nowrap
 set nu
 set helplang=cn
 set hlsearch
 "   快速取消搜索高亮
 noremap <leader><space> :set nohlsearch<CR>
 set incsearch
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 syntax enable
 set ignorecase
 set backspace=indent,eol,start
@@ -64,6 +108,7 @@ set nolist
 set cmdheight=2
 set autowrite
 set equalalways
+autocmd GUIEnter * simalt ~x
 
 
 "           文件的代码格式
@@ -116,6 +161,8 @@ noremap <leader>p :!python %<CR>
 noremap <leader>h :!%<CR>
 "           Html run in browser(shell)
 " noremap <leader>h :firefox %<CR>
+" Python dll path
+set pythonthreedll=E:\Python\python39.dll
 
 "           括号自动补全(自定义)
 inoremap { {}<ESC>i
@@ -142,8 +189,10 @@ set guifont=consolas:h12:cANSI:qDRAFT
 " set ctags
 " 执行下列命令加入系统函数的tags
 " ctags -I __THROW –file-scope=yes –langmap=c:+.h –languages=c,c++ –links=yes –c-kinds=+p --fields=+S -R -f ~/.vim/systags /usr/include /usr/local/include
-" set tags = ~/E:/program/Gvim82/Tags_stm32f10x/tags
-" set tags = ~/C:/Users/7huai/Desktop/FreeRTOS/freertos/Source/tags
+" set tags = ~/E:/program/Gvim82/Tags_stm32f10x
+" set tags = /C:/Users/7huai/Desktop/FreeRTOS/freertos/Source/tags
+set tags=tags;
+set autochdir
 
 "-------------------------Plug-----------------------------"
 filetype plugin indent on
@@ -151,7 +200,7 @@ syntax enable
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('E:\program\Gvim82\Plugins')
+call plug#begin('E:\Vim\Plugins')
 
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/L9'
@@ -181,7 +230,7 @@ Plug 'junegunn/gv.vim'
 Plug 'yianwillis/vimcdoc'
 Plug 'tpope/vim-surround'
 Plug 'rafi/awesome-vim-colorschemes'
-
+Plug 'kkoenig/wimproved.vim'
 " Plug 'https://github.com/altercation/vim-colors-solarized.git'
 call plug#end()
 
@@ -329,6 +378,8 @@ let g:indent_guides_space_guides = 1
 
 "-------------------taglist-----------------------------------"
 set tags+=~\.vim\systags\tags
+" set tags += E:\program\Gvim82\Tags_stm32f10x\tags
+" set tags
 "   设定windows中ctags程序的位置
 let Tlist_Ctags_Cmd = 'ctags'
 "   不同时显示多个文件的tag，只显示当前文件的
@@ -447,3 +498,12 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" vim-fullscreen
+" 去掉Gvim难看的工具栏与菜单栏，滚动条
+" set guioptions-=T
+" set guioptions-=r
+" set guioptions-=L
+" set guioptions-=m
+" autocmd GUIEnter * silent! WToggleClean
+autocmd GUIEnter * silent! WToggleFullscreen
