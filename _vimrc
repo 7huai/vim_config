@@ -66,6 +66,7 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
+
 "           记不住这个是啥作用了
 cnoremap <expr>%% getcmdtype()==':'?expand('%:h').'/':'%%'
 
@@ -73,7 +74,6 @@ cnoremap <expr>%% getcmdtype()==':'?expand('%:h').'/':'%%'
 "           全局配置
 
 let mapleader = ","
-noremap <tab> %
 set mousehide
 set nospell
 set nowrap
@@ -83,8 +83,8 @@ set hlsearch
 "   快速取消搜索高亮
 noremap <leader><space> :set nohlsearch<CR>
 set incsearch
-set background=dark
-" set background=light
+" set background=dark
+set background=light
 syntax enable
 set ignorecase
 set backspace=indent,eol,start
@@ -110,6 +110,10 @@ set autowrite
 set equalalways
 autocmd GUIEnter * simalt ~x
 
+" 窗口快捷操作
+noremap <silent> <tab> :tabnext<CR>
+noremap <silent> bp :bp<CR>
+noremap <silent> bn :bn<CR>
 
 "           文件的代码格式
 set encoding=utf-8
@@ -208,7 +212,7 @@ Plug 'vim-scripts/L9'
 " Plug 'yggdroot/leaderf'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'https://github.com/tpope/vim-commentary'
@@ -309,8 +313,9 @@ autocmd FileType html,css EmmetInstall
 "   Note that the trailing, still needs to be entered, so the new keymap would be <C-Z>,
 "
 " ------------------------vim-markdown-------------
-let g:vim_markdown_new_list_item_indent = 2
-
+let g:markdown_fenced_languages = ['c', 'c++', 'python', 'html']
+let g:markdown_syntax_conceal = 0
+let g:markdown_minlines = 100
 " ----------------------------vim-commentary-------------
 "
 " Relax! You just have to adjust 'commentstring':
