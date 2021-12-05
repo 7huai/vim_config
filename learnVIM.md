@@ -13,7 +13,27 @@
 ## 基本操作
 **对多行进行操作：** Ctrl+v 选中 I（光标前）A（光标后）
 ### 文件切换
-- `gf` 跳到光标下的当前目录文件中（但限于当前目录）
+`gf` 跳到光标下的当前目录文件中（但限于当前目录）
+`gt` = `:tabnext` 到下一个tab（标签页）
+`gT` = `tabprevious`
+`gt {counter}`
+`gT {counter}`
+`:tabs` 列出标签页和它们的窗口
+
+:{count}tabn[ext]
+:tabn[ext] {count}
+		转到第 {count} 个标签页。首个标签页编号为一。 >
+		    :-tabnext	" 转到上个标签页
+		    :+tabnext	" 转到下个标签页
+		    :+2tabnext	" 转到往后第二个标签页
+		    :1tabnext	" 转到首个标签页
+		    :$tabnext	" 转到末个标签页
+		    :tabnext $	" 同上
+		    :tabnext #  " 转到最近访问的标签页
+		    :tabnext -	" 转到上个标签页
+		    :tabnext -1	" 同上
+		    :tabnext +	" 转到下个标签页
+		    :tabnext +1	" 同上
 
 ### 窗口操作
 #### 窗口大小 
